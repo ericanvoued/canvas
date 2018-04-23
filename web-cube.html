@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>网格</title>
+    <style>
+        .cl:after, .clearfix:after {
+            content: ".";
+            display: block;
+            height: 0;
+            clear: both;
+            visibility: hidden
+        }
+
+        .cl, .clearfix {
+            zoom: 1
+        }
+
+        ul, li {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        ul {
+            width: 420px;
+            margin: 10px auto;
+        }
+
+        #canvas {
+            margin: 10px;
+        }
+
+        li {
+            float: left;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 42px;
+
+        }
+
+        li.current {
+            background: green;
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+<div style="width: 420px;margin: 0 auto;position: relative;" id="trend">
+    <ul class="clearfix">
+        <li>1</li>
+        <li class="current">2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+        <li>7</li>
+        <li>8</li>
+        <li>9</li>
+        <li>10</li>
+    </ul>
+    <ul class="clearfix">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+        <li>7</li>
+        <li>8</li>
+        <li>9</li>
+        <li class="current">10</li>
+    </ul>
+    <ul class="clearfix">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+        <li>7</li>
+        <li class="current">8</li>
+        <li>9</li>
+        <li>10</li>
+    </ul>
+    <ul class="clearfix">
+        <li class="current">1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+        <li>7</li>
+        <li>8</li>
+        <li>9</li>
+        <li>10</li>
+    </ul>
+    <ul class="clearfix">
+        <li class="current">1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+        <li>7</li>
+        <li>8</li>
+        <li>9</li>
+        <li>10</li>
+    </ul>
+    <ul class="clearfix">
+        <li class="current">1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+        <li>7</li>
+        <li>8</li>
+        <li>9</li>
+        <li>10</li>
+    </ul>
+    <ul class="clearfix">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li class="current">6</li>
+        <li>7</li>
+        <li>8</li>
+        <li>9</li>
+        <li>10</li>
+    </ul>
+    <ul class="clearfix">
+        <li class="current">1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+        <li>7</li>
+        <li>8</li>
+        <li>9</li>
+        <li>10</li>
+    </ul>
+    <ul class="clearfix">
+        <li>1</li>
+        <li>2</li>
+        <li class="current">3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+        <li>7</li>
+        <li>8</li>
+        <li>9</li>
+        <li>10</li>
+    </ul>
+    <ul class="clearfix">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+        <li>7</li>
+        <li>8</li>
+        <li>9</li>
+        <li class="current">10</li>
+    </ul>
+    <ul class="clearfix">
+        <li class="current">1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+        <li>7</li>
+        <li>8</li>
+        <li>9</li>
+        <li>10</li>
+    </ul>
+    <ul class="clearfix">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+        <li class="current">7</li>
+        <li>8</li>
+        <li>9</li>
+        <li>10</li>
+    </ul>
+    <ul class="clearfix">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+        <li class="current">7</li>
+        <li>8</li>
+        <li>9</li>
+        <li>10</li>
+    </ul>
+    <canvas width="100%" height="100%" style="position: absolute;top: 0;left: 0;z-index: -1;" id="trendMap"></canvas>
+</div>
+
+<canvas id="canvas" width="800" height="800"></canvas>
+
+
+<script>
+
+    var trendMap = {
+        map: document.getElementById("trend"),
+        trendMap: document.getElementById('trendMap'),
+        ctx: document.getElementById('trendMap').getContext('2d'),
+        ul: document.getElementById("trend").getElementsByTagName('ul'),
+        mapHeight: document.getElementById("trend").offsetHeight,
+        mapWidth: document.getElementById("trend").offsetWidth,
+        yArray: [],
+        xArray: [],
+        strokeColor: '#00ff00',
+
+        init: function () {
+            this.drewLine()
+        },
+        getPositionY: function () {
+            for (var i = 0; i < this.ul.length; i++) {
+                this.yArray[i] = this.ul[i].offsetTop;
+            }
+            return this.yArray;
+        },
+        getPositionX: function () {
+            for (var i = 0; i < this.ul.length; i++) {
+                this.xArray[i] = this.ul[i].getElementsByClassName('current')[0].offsetLeft - this.ul[i].offsetLeft;
+            }
+            return this.xArray;
+        },
+        drewLine: function () {
+            this.trendMap.setAttribute('width', this.mapWidth);
+            this.trendMap.setAttribute('height', this.mapHeight);
+            this.getPositionY();
+            this.getPositionX();
+            this.ctx.strokeStyle = this.strokeColor;
+            this.ctx.lineWidth = 1;
+            this.ctx.scale(1, 1);
+            for (var i = 0; i < this.ul.length - 1; i++) {
+                this.ctx.beginPath();
+                this.ctx.save();
+                this.ctx.moveTo(this.xArray[i] + 21, this.yArray[i] + 21);
+                this.ctx.lineTo(this.xArray[i + 1] + 21, this.yArray[i + 1] + 21);
+                this.ctx.stroke();
+                this.ctx.restore();
+            }
+            this.ctx.closePath();
+        }
+
+    }
+    trendMap.init()
+
+    var drewImage = {
+        canvas: document.getElementById("canvas"),
+        ctx: this.canvas.getContext('2d'),
+        strokeColor: '#00ff00',
+        fillColor: '#0000ff',
+
+        run: function () {
+            this.grip();
+            this.drewText()
+        },
+        //网格
+        grip: function () {
+            this.ctx.strokeStyle = this.strokeColor;
+            this.ctx.fillStyle = this.fillColor;
+            this.ctx.scale(1, 1);
+
+            for (var x = 0; x < 810; x += 25) {
+                this.ctx.beginPath();
+                this.ctx.save();
+                if (x % 125 == 0) {
+                    this.ctx.lineWidth = 1;
+                } else {
+                    this.ctx.lineWidth = 0.5;
+                }
+                this.ctx.moveTo(x, 0);
+                this.ctx.lineTo(x, 800);
+                this.ctx.stroke();
+                this.ctx.restore();
+            }
+
+            for (var y = 0; y < 810; y += 25) {
+                this.ctx.beginPath();
+                this.ctx.save();
+                if (y % 125 == 0) {
+                    this.ctx.lineWidth = 1;
+                } else {
+                    this.ctx.lineWidth = 0.5;
+                }
+                this.ctx.moveTo(0, y);
+                this.ctx.lineTo(800, y);
+                this.ctx.stroke();
+                this.ctx.restore();
+            }
+            this.ctx.closePath();
+        },
+        //字体填充
+        drewText: function () {
+            this.ctx.font = "16px serif";
+            this.ctx.beginPath();
+            for (var i = 0; i < 10; i++) {
+                for (var j = 0; j < 32; j++) {
+                    this.ctx.fillText(i, j * 25 + 9, i * 25 + 18)
+                }
+            }
+            for (var i = 10; i < 32; i++) {
+                for (var j = 0; j < 32; j++) {
+                    this.ctx.fillText(i, j * 25 + 6, i * 25 + 18)
+                }
+            }
+            this.ctx.fill()
+        }
+    }
+
+    drewImage.run();
+
+
+</script>
+</body>
+</html>
