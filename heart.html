@@ -9,28 +9,47 @@
 <img src="./images/xx.png" alt="" id="flower">
 <script !src="">
     function draw(){
-        var drawing = document.getElementById("drawing"),
-            pic = document.getElementById('flower'); //获取描边图片
-        drawing.width = '500';
-        drawing.height = '500';
+        var drawing = document.getElementById("drawing");
+//            pic = document.getElementById('flower'); //获取描边图片
+        drawing.width = '700';
+        drawing.height = '700';
         if (drawing.getContext){
             var content = drawing.getContext("2d"),
                 radian = 0,
-                radian_add = Math.PI/40;
-            content.translate(250,250);
+                radian_add = Math.PI/180;
+            content.lineWidth=2;
+            content.fillStyle = '#ff0000';
+            content.translate(350,350);
+
+            content.moveTo(getX1(radian),getY1(radian))
             function heart(){
+
+                radian+=radian_add;
                 X = getX1(radian);
                 Y = getY1(radian);
-                content.drawImage(pic,X,Y,25,25);   //在给定坐标绘制给定大小的图片
-                radian+=radian_add;
-                if (radian > (2*Math.PI)){ //绘制完整的心型线后取消间歇调用
+                content.lineTo(X,Y)
+
+                content.fill();
+                if (radian > (2*Math.PI)){
                     clearInterval(intervalId);
+
+
+
                 }
             }
-            intervalId = setInterval(heart,100);  //设置间歇调用，间隔为100ms
+            intervalId = setInterval(heart,16);
         }
     }
     draw()
+
+
+
+
+
+
+
+
+
 
     function getX(t){   //获取玫瑰线的X坐标
         return 100 * Math.sin(4*t)*Math.cos(t);
