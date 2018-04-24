@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <canvas id="canvas" width="400" height="400" style="margin: 0 auto;"></canvas>
+    <script !src="">
+        var canvas = document.getElementById('canvas');
+        var r = 100,range = 50,angle = 0;speed = 0.05;
+        var ctx = canvas.getContext('2d');
+        ctx.scale(1,1);
+        ctx.fillStyle = "#00ff00";
+        function drew(a){
+            ctx.beginPath();
+            ctx.save();
+            ctx.arc(200,200,r+Math.sin(a)*range,0,2*Math.PI,false);
+            ctx.restore();
+            ctx.closePath();
+            ctx.fill();
+        }
+
+        !function moving(){
+            window.requestAnimationFrame(moving);
+            ctx.clearRect(0,0,400,400);
+            angle+=speed;
+            drew(angle);
+
+        }()
+
+
+    </script>
+</body>
+</html>
